@@ -1,0 +1,9 @@
+# .gitignore
+node_modules/
+.vscode/
+*.log
+*.tmp
+*.json
+.DS_Store
+Thumbs.db
+*.swp
