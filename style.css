@@ -1138,40 +1138,25 @@ footer h1 {
 }
 
 /* Certifications Section with Flip Cards */
-.certifications-section {
-  width: 100%;
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .certifications-grid {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 30px;
   margin-top: 40px;
+  perspective: 1000px;
   padding: 0 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  width: 100%;
-  max-width: 1400px;
-}
-
-.certifications-grid::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
 }
 
 .certification-card {
-  flex: 0 0 300px;
+  position: relative;
+  width: 300px;
   height: 300px;
   transform-style: preserve-3d;
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   perspective: 1000px;
-  scroll-snap-align: center;
+  flex: 0 0 auto;
 }
 
 .certification-card:hover {
@@ -1344,11 +1329,12 @@ footer h1 {
 /* Responsive Adjustments */
 @media screen and (max-width: 768px) {
   .certifications-grid {
-    padding: 0 10px;
+    flex-direction: column;
+    align-items: center;
   }
   
   .certification-card {
-    flex: 0 0 250px;
+    width: 280px;
     height: 250px;
   }
   
@@ -1362,12 +1348,5 @@ footer h1 {
   
   .hire-me-section p {
     font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .certification-card {
-    flex: 0 0 200px;
-    height: 200px;
   }
 }
