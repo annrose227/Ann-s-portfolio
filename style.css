@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   /* height: 100%; */
   margin: 0;
@@ -144,6 +148,7 @@ header ul a {
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
+  margin-bottom: 0;
 }
 
 .hero-info .hero-info-title {
@@ -221,14 +226,49 @@ header ul a {
 .scroll-down {
   height: 50px;
   width: 30px;
-  border: 2px solid lightgray;
+  border: 2px solid #727fde;
   position: absolute;
   left: 49%;
   bottom: 8%;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 0 15px rgba(211, 211, 211, 0.477);
+  box-shadow: 0 0 15px rgba(114, 127, 222, 0.3);
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  user-select: none;
 }
+
+.scroll-down:hover {
+  transform: translateY(5px);
+  box-shadow: 0 0 20px rgba(114, 127, 222, 0.5);
+}
+
+.scroll-down:active {
+  transform: translateY(8px) scale(0.95);
+  box-shadow: 0 0 10px rgba(114, 127, 222, 0.3);
+  background: rgba(114, 127, 222, 0.2);
+}
+
+.scroll-down.clicked {
+  animation: clickEffect 0.5s ease;
+}
+
+@keyframes clickEffect {
+  0% {
+    transform: scale(0.95);
+    background: rgba(114, 127, 222, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    background: rgba(114, 127, 222, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
 .scroll-down::before,
 .scroll-down::after {
   content: "";
@@ -237,7 +277,7 @@ header ul a {
   left: 50%;
   height: 10px;
   width: 10px;
-  border: 2px solid lightgray;
+  border: 2px solid #727fde;
   transform: translate(-50%, -100%) rotate(45deg);
   border-top: transparent;
   border-left: transparent;
@@ -252,14 +292,17 @@ header ul a {
 @keyframes scroll-down {
   0% {
     opacity: 0;
+    transform: translate(-50%, -100%) rotate(45deg) scale(0.8);
   }
   30%,
   60% {
     opacity: 1;
+    transform: translate(-50%, -100%) rotate(45deg) scale(1);
   }
   100% {
     top: 90%;
     opacity: 0;
+    transform: translate(-50%, -100%) rotate(45deg) scale(0.8);
   }
 }
 
@@ -268,8 +311,9 @@ header ul a {
   flex-direction: column;
   align-items: center;
   width: 80%;
-  margin-top: 100%;
+  margin-top: 30%;
   z-index: 2;
+  position: relative;
 }
 .section-tile {
   font-size: 40px;
@@ -381,8 +425,8 @@ header ul a {
   position: relative;
   width: 80%;
   height: auto;
-  margin-top: 200px;
-  margin-bottom: 700px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   z-index: 2;
 }
 
@@ -497,25 +541,26 @@ header ul a {
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-top: 100px;
   margin-bottom: 100px;
 }
 
 .skills-box {
   width: 100%;
   min-height: 50vh;
-  /* height: 20vh; */
   position: relative;
   display: flex;
   align-items: start;
   justify-content: center;
   flex-wrap: wrap;
+  padding-bottom: 150px;
 }
 
 .skills-image {
   width: 70%;
-
   mix-blend-mode: lighten;
   opacity: 0.7;
+  margin-bottom: 50px;
 }
 .designer {
   position: absolute;
@@ -554,7 +599,8 @@ header ul a {
   overflow: hidden;
   mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
   mix-blend-mode: difference;
-  opacity: 0.8;
+  opacity: 0.6;
+  z-index: 1;
 }
 .slider .list {
   display: flex;
@@ -598,11 +644,11 @@ header ul a {
   width: 80%;
   min-height: 100vh;
   display: flex;
-
   justify-content: center;
   gap: 5%;
   align-items: center;
   position: relative;
+  margin-top: 100px;
 }
 
 .contact-section h1 {
@@ -640,16 +686,23 @@ header ul a {
   margin-top: 30px;
   margin-bottom: 5px;
 }
-.contact-box input {
+.contact-box input,
+.contact-box textarea {
   padding: 7.5px 30px;
   background-color: lightgray;
   width: 80%;
-  height: 25px;
   border: none;
   outline: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+.contact-box textarea {
+  height: 100px;
+  resize: vertical;
+  padding: 10px 30px;
+}
+
 .contact-box button {
   margin-top: 30px;
   color: white;
@@ -662,7 +715,12 @@ header ul a {
   transition: 0.3s;
 }
 
-.contact-box button:hover {
+.contact-box button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.contact-box button:hover:not(:disabled) {
   box-shadow: 0 0 15px #727fde86;
   opacity: 0.7;
 }
@@ -846,12 +904,12 @@ footer h1 {
     font-size: 30px;
   }
   .info-cards {
-    grid-template-columns: auto;
+    grid-template-columns: auto auto;
   }
 
   .card:nth-child(3) {
-    grid-column: span 2;
-    height: 70vh;
+    grid-row: span 1;
+    height: auto;
   }
 
   .info-cards .card h1 {
@@ -868,7 +926,8 @@ footer h1 {
   }
 
   .my-projects {
-    margin-bottom: 300px;
+    margin-top: 80px;
+    margin-bottom: 80px;
   }
 
   .project-vidbox video {
@@ -895,6 +954,32 @@ footer h1 {
 
   .footer h1 {
     font-size: 20px;
+  }
+
+  .project-card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .project-vidbox, .project-info {
+    width: 90%;
+    padding-left: 0;
+  }
+  .project-info {
+    margin-top: 20px;
+  }
+
+  .skills-box {
+    padding-bottom: 120px;
+  }
+  
+  .slider {
+    width: 80%;
+    right: 10%;
+    bottom: 2%;
+  }
+
+  .info-section {
+    margin-top: 25%;
   }
 }
 
@@ -950,7 +1035,8 @@ footer h1 {
   }
 
   .my-projects {
-    margin-bottom: 600px;
+    margin-top: 60px;
+    margin-bottom: 60px;
   }
 
   .project-card {
@@ -987,12 +1073,16 @@ footer h1 {
   }
 
   .slider {
-    bottom: 0;
+    width: 90%;
+    right: 5%;
+    bottom: 1%;
+  }
+  
+  .skills-image {
+    width: 90%;
+    margin-bottom: 30px;
   }
 
-  .slider img {
-    width: 60%;
-  }
   .contact-section {
     flex-direction: column;
     margin-top: 100px;
@@ -1013,6 +1103,271 @@ footer h1 {
   }
 
   .menu-icon {
-    display: inline;
+    display: block;
+  }
+  .sidebar {
+    width: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+  }
+  .sidebar.open-sidebar {
+    width: 80%;
+    opacity: 1;
+    bottom: 0;
+    border-radius: 0;
+  }
+
+  .info-cards {
+    grid-template-columns: auto;
+  }
+  .card:nth-child(3), .card:nth-child(4) {
+    grid-column: span 1;
+  }
+  .project-vidbox, .project-info {
+    width: 100%;
+  }
+  .hero-info h1 {
+    font-size: 40px;
+  }
+  .hero-info p {
+    font-size: 16px;
+  }
+
+  .info-section {
+    margin-top: 20%;
+  }
+}
+
+/* Certifications Section with Flip Cards */
+.certifications-section {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.certifications-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 30px;
+  margin-top: 40px;
+  padding: 0 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: 100%;
+  max-width: 1400px;
+}
+
+.certifications-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.certification-card {
+  flex: 0 0 300px;
+  height: 300px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  perspective: 1000px;
+  scroll-snap-align: center;
+}
+
+.certification-card:hover {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-front {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid #727fde65;
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  background: rgba(114, 127, 222, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid #727fde65;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-front i,
+.card-front h3,
+.card-back h3,
+.card-back p,
+.card-back .details,
+.view-cert {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(20px);
+}
+
+.view-cert {
+  transform: translateZ(30px);
+}
+
+.certification-card:hover .card-front i,
+.certification-card:hover .card-front h3 {
+  transform: translateZ(20px) scale(0.9);
+}
+
+.certification-card:hover .card-back h3,
+.certification-card:hover .card-back p,
+.certification-card:hover .card-back .details {
+  transform: translateZ(20px) scale(1.1);
+}
+
+.card-front i {
+  font-size: 60px;
+  color: #727fde;
+  margin-bottom: 20px;
+}
+
+.card-front h3 {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.card-back h3 {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.card-back p {
+  color: #727fde;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.card-back .details {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.view-cert {
+  display: inline-block;
+  padding: 10px 25px;
+  background: #727fde;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  border: 1px solid #727fde;
+}
+
+.view-cert:hover {
+  background: transparent;
+  color: #727fde;
+}
+
+/* Learning Widget */
+.learning-widget {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid #727fde65;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.learning-widget h3 {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.learning-status {
+  display: inline-block;
+  padding: 8px 15px;
+  background: rgba(114, 127, 222, 0.2);
+  border-radius: 20px;
+  color: #727fde;
+  font-size: 16px;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.learning-status:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(114, 127, 222, 0.2);
+}
+
+/* Hire Me Section */
+.hire-me-section {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid #727fde65;
+  border-radius: 15px;
+  padding: 40px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.hire-me-section h2 {
+  color: #fff;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.hire-me-section p {
+  color: #727fde;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .certifications-grid {
+    padding: 0 10px;
+  }
+  
+  .certification-card {
+    flex: 0 0 250px;
+    height: 250px;
+  }
+  
+  .hire-me-section {
+    padding: 30px 20px;
+  }
+  
+  .hire-me-section h2 {
+    font-size: 24px;
+  }
+  
+  .hire-me-section p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .certification-card {
+    flex: 0 0 200px;
+    height: 200px;
   }
 }
