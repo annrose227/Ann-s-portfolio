@@ -6,6 +6,8 @@ const video5 = document.getElementById("projectVideo5");
 const video6 = document.getElementById("projectVideo6");
 const hoverSign = document.querySelector(".hover-sign");
 
+//sidebar elemenst//
+const sidebar = document;
 const videoList = [video1, video2, video3, video4, video5, video6];
 
 videoList.forEach(function (video) {

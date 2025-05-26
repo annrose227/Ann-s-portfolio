@@ -687,6 +687,69 @@ footer h1 {
   font-size: 16px;
   margin: 0;
 }
+
+.menu-icon {
+  font-size: 35px;
+  cursor: pointer;
+  display: none;
+}
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 70%;
+  width: 0%;
+  background-color: #000000b8;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  box-shadow: 0 0 20px rgba(211, 211, 211, 0.411);
+  border-bottom-left-radius: 100%;
+  opacity: 0;
+}
+.close-icon {
+  font-size: 50px;
+  color: lightgray;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.sidebar ul {
+  padding-left: 20px;
+}
+.sidebar ul li {
+  list-style: none;
+  margin-bottom: 30px;
+}
+.sidebar ul li a {
+  text-decoration: none;
+  color: lightgray;
+  font-size: 30px;
+  font-weight: 700;
+  text-shadow: 0 0 15px rgba(128, 128, 128, 0.256);
+}
+
+.sidebar .social-icons {
+  padding-left: 20px;
+  margin-top: 60px;
+  white-space: nowrap;
+}
+
+.sidebar .social-icons a {
+  font-size: 35px;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+
+.sidebar.open-sidebar {
+  animation: openSidebarAnimation 1.5s forwards;
+}
+@keyframes openSidebarAnimation {
+  to {
+    width: 80%;
+    opacity: 1;
+    bottom: 0;
+    border-radius: 0;
+  }
+}
 .autoBlur {
   animation: autoBlurAnimation linear both;
   animation-timeline: view();
@@ -832,5 +895,124 @@ footer h1 {
 
   .footer h1 {
     font-size: 20px;
+  }
+}
+
+/*MOBILE RESPONSIVE */
+@media screen and (max-width: 700px) {
+  header {
+    position: fixed;
+    height: 50px;
+  }
+
+  header ul {
+    display: none;
+  }
+  header .box-icons {
+    display: none;
+  }
+
+  header h1 {
+    font-size: 25px;
+  }
+  .blackhole-box video {
+    margin-top: -16%;
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  .autoBlur {
+    animation: none;
+  }
+
+  .hero-info {
+    bottom: 5%;
+  }
+
+  .scroll-down {
+    bottom: 5%;
+  }
+
+  .hero-info h1 {
+    line-height: 50px;
+  }
+
+  .hero-vid-box {
+    height: 200px;
+    top: 5%;
+    right: 5%;
+  }
+
+  .card video {
+    width: 100%;
+  }
+
+  .my-projects {
+    margin-bottom: 600px;
+  }
+
+  .project-card {
+    flex-direction: column;
+    margin-left: 25%;
+    gap: 30px;
+  }
+
+  .project-info {
+    width: 85%;
+  }
+
+  .project-info h1 {
+    text-wrap: nowrap;
+  }
+
+  .project-info p {
+    max-width: 300px;
+  }
+
+  .designer {
+    top: 15%;
+    left: 18%;
+  }
+
+  .coder {
+    top: 50%;
+    left: 18%;
+  }
+
+  .skills-box h1 {
+    margin-bottom: 0;
+    margin-top: 70px;
+  }
+
+  .slider {
+    bottom: 0;
+  }
+
+  .slider img {
+    width: 60%;
+  }
+  .contact-section {
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+
+  .contact-section .section-title {
+    top: -40px;
+    left: 25%;
+  }
+
+  footer h1 {
+    font-size: 17px;
+  }
+
+  .project-vidbox {
+    min-width: 200px;
+  }
+
+  .menu-icon {
+    display: inline;
   }
 }
