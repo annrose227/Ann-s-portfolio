@@ -35,6 +35,9 @@ closeIcon.addEventListener('click', () => {
   sidebar.classList.remove('open-sidebar');
 });
 
+// Initialize EmailJS
+emailjs.init("MnoXopa4TOsLTOYyV");
+
 // Contact Form Handling
 function handleSubmit(event) {
   event.preventDefault();
@@ -55,7 +58,7 @@ function handleSubmit(event) {
   };
 
   // Send email using EmailJS
-  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+  emailjs.send('contact_service', 'template_5n8vgto', formData)
     .then(function() {
       // Show success message
       alert('Message sent successfully!');
