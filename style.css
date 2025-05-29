@@ -13,7 +13,7 @@ body {
   /* height: 100%; */
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif; /* Use Roboto font */
+  font-family: "Roboto", sans-serif; /* Use Roboto font */
   color: var(--text-color); /* Use text color variable */
   min-height: 100vh;
 }
@@ -60,12 +60,14 @@ header {
   display: flex;
 }
 .left {
+  border-radius: 50px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
   min-width: 200px;
 }
 .left img {
+  border-radius: 60px;
   width: 80px;
   height: 80px;
   margin: 0 15px;
@@ -976,7 +978,8 @@ footer h1 {
     flex-direction: column;
     align-items: center;
   }
-  .project-vidbox, .project-info {
+  .project-vidbox,
+  .project-info {
     width: 90%;
     padding-left: 0;
   }
@@ -990,7 +993,7 @@ footer h1 {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .skills-image {
     width: 90%;
     margin-bottom: 50px;
@@ -1019,7 +1022,7 @@ footer h1 {
     align-items: center;
     margin-bottom: 40px; /* Add margin between items */
   }
-  
+
   .slider {
     position: relative;
     bottom: auto;
@@ -1158,7 +1161,7 @@ footer h1 {
     right: 5%;
     bottom: 1%;
   }
-  
+
   .skills-image {
     width: 90%;
     margin-bottom: 30px;
@@ -1203,10 +1206,12 @@ footer h1 {
   .info-cards {
     grid-template-columns: auto;
   }
-  .card:nth-child(3), .card:nth-child(4) {
+  .card:nth-child(3),
+  .card:nth-child(4) {
     grid-column: span 1;
   }
-  .project-vidbox, .project-info {
+  .project-vidbox,
+  .project-info {
     width: 100%;
   }
   .hero-info h1 {
@@ -1397,20 +1402,20 @@ footer h1 {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .certification-card {
     width: 280px;
     height: 250px;
   }
-  
+
   .hire-me-section {
     padding: 30px 20px;
   }
-  
+
   .hire-me-section h2 {
     font-size: 24px;
   }
-  
+
   .hire-me-section p {
     font-size: 16px;
   }
@@ -1419,5 +1424,3 @@ footer h1 {
     display: none;
   }
 }
-
-
