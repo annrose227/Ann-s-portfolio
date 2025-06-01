@@ -10,13 +10,42 @@ const hoverSign = document.querySelector(".hover-sign");
 // const sidebar = document; // Removed incorrect declaration
 const videoList = [video1, video2, video3, video4, video5, video6];
 
+// Intersection Observer for lazy loading videos
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const video = entry.target;
+      video.load(); // Load video when it becomes visible
+      videoObserver.unobserve(video); // Stop observing once loaded
+    }
+  });
+}, {
+  rootMargin: '50px 0px',
+  threshold: 0.1
+});
+
+// Observe all videos
+videoList.forEach(video => {
+  if (video) {
+    videoObserver.observe(video);
+  }
+});
+
+// Optimize hover events with debouncing
+let hoverTimeout;
 videoList.forEach(function (video) {
+  if (!video) return;
+  
   video.addEventListener("mouseover", function () {
-    video.play();
-    hoverSign.classList.add("active");
+    clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(() => {
+      video.play();
+      hoverSign.classList.add("active");
+    }, 50);
   });
 
   video.addEventListener("mouseout", function () {
+    clearTimeout(hoverTimeout);
     video.pause();
     hoverSign.classList.remove("active");
   });
@@ -93,9 +122,27 @@ scrollDown.addEventListener('click', () => {
   document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
 });
 
-// Learning Widget Animation
+// Optimize scroll animations
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '50px 0px'
+});
+
+// Observe elements with animations
+document.querySelectorAll('.autoBlur, .autoDisplay, .fadeInRight').forEach(el => {
+  scrollObserver.observe(el);
+});
+
+// Optimize learning widget animation
 const learningStatuses = document.querySelectorAll('.learning-status');
 let currentIndex = 0;
+let animationFrame;
 
 function updateLearningStatus() {
   learningStatuses.forEach((status, index) => {
@@ -109,8 +156,19 @@ function updateLearningStatus() {
   });
   
   currentIndex = (currentIndex + 1) % learningStatuses.length;
+  animationFrame = requestAnimationFrame(() => {
+    setTimeout(updateLearningStatus, 3000);
+  });
 }
 
-// Initialize learning widget
+// Start animation
 updateLearningStatus();
-setInterval(updateLearningStatus, 3000);
+
+// Cleanup on page unload
+window.addEventListener('unload', () => {
+  if (animationFrame) {
+    cancelAnimationFrame(animationFrame);
+  }
+  videoObserver.disconnect();
+  scrollObserver.disconnect();
+});

@@ -38,9 +38,12 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* THIS fills the video while maintaining aspect */
+  object-fit: cover;
   z-index: -1;
   mix-blend-mode: lighten;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 header {
@@ -458,14 +461,20 @@ header ul a {
   min-width: 400px;
   transition: 0.5s;
   mix-blend-mode: exclusion;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .project-vidbox video {
   object-fit: cover;
   width: 100%;
-  box-shadow: 0 0 10px var(--text-color); /* Use text color variable */
+  box-shadow: 0 0 10px var(--text-color);
   border-radius: 20px;
   transition: 0.5s;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 .project-vidbox video:hover {
   box-shadow: 0 0 20px var(--text-color); /* Use text color variable */
@@ -831,6 +840,9 @@ footer h1 {
 .autoBlur {
   animation: autoBlurAnimation linear both;
   animation-timeline: view();
+  will-change: filter, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 @keyframes autoBlurAnimation {
@@ -851,6 +863,9 @@ footer h1 {
 .autoDisplay {
   animation: autoDisplayAnimation both;
   animation-timeline: view();
+  will-change: transform, opacity, filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 @keyframes autoDisplayAnimation {
@@ -868,6 +883,9 @@ footer h1 {
 .fadeInRight {
   animation: fadeInAnimation both;
   animation-timeline: view();
+  will-change: transform, opacity, filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 @keyframes fadeInAnimation {
